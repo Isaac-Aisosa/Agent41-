@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<div class="collapse" id="navbarToggleExternalContent">
+    <div class="bg-dark p-4">
+        <h5 class="text-white h4">Agent41.org</h5>
+        <span class="text-muted">Connect you to better clients</span>
+    </div>
+</div>
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>
+
+
+
+<div class="container mt-3 " align="center">
+       <div align="left">
+       <a href="{% url 'dashboard'%}">
+          <i class='bx bx-grid-alt text-info' style="font-size: 30px"></i>
+          <span class="text-info" style="font-size: 30px">Dashboard</span>
+       </a>
+    </div>
+
+    <h4 style="color:gray;">
+        Feedback Messages
+    </h4>
+
+    <span class="btn  btn-info" >{{feedback.count}}</span>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">S/N</th>
+      <th scope="col">User</th>
+      <th scope="col">Message</th>
+      <th scope="col">Time</th>
+
+    </tr>
+  </thead>
+  <tbody>
+   {% for feedback in feedback %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>
+          {% if feedback.user %}
+          {{feedback.user}}
+          {% else %}
+          Anonymous
+          {% endif %}
+      </td>
+      <td>{{feedback.message}}</td>
+      <td>{{feedback.timestamp}}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+</div>
+
+{% endblock content %}

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+  <div class="container" align="center">
+
+   <div class=" shadow p-3 mb-5 mt-5 bg-body rounded bg-dark" align="center" style="width: 20rem;">
+  <div class="card-body">
+     <img alt="..." class="rounded-circle"
+          height="70dp" src="{% static 'images/icon.png' %}" width="70dp"><br>
+     <h4><font style="color:gray;">Staff Login</font></h4></div><br>
+{% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+  {% endif %}
+
+  {% if next %}
+    {% if user.is_authenticated %}
+      <p>Your account doesn't have access to this page. To proceed,
+      please login with an account that has access.</p>
+    {% else %}
+      <p>Please login to see this page.</p>
+    {% endif %}
+  {% endif %}
+
+  <form method="post" action="{% url 'staff_login' %}">
+    {% csrf_token %}
+
+  <b>Username</b>
+        <input type="text" class="form-control" id="username" placeholder="username" name="username" value="{{ username }}">
+
+       <br><b>Password</b>
+        <input type="password" class="form-control" id="password" placeholder="password" name="password" value="{{ password }}">
+
+        <input type="hidden" id="apartment" name="apartment" value = {{apartment.pk}}>
+
+           <br><button type="submit"  value="login" class="btn btn-primary">Submit</button>
+    <br>
+
+    <input type="hidden" name="next" value="{{ next }}" />
+
+  </form>
+<br>
+    <div align="center">
+  {# Assumes you setup the password_reset view in your URLconf #}
+  <h6><a href="{% url 'password_reset' %}">Forgot password?</a></h6>
+    <br>
+
+ <br>
+    </div>
+  </div>
+  </div>
+
+
+{%endblock%}

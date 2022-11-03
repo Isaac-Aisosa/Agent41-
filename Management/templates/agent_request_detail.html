@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<br>
+<div class="container" align="center">
+<div class="center bg-info" style="  text-align: left;
+                  border-radius: 40px;
+                  bottom: 0;
+                  padding: 10px;
+                  background-color: #f2f0f0;">
+    <div class="center">
+        <font color="white" style="font-size: 30px;"><b style="color: gray;">Agent {{rpay.user}}</b> Payment Request Detail </font>
+    </div>
+</div>
+<br>
+
+<div class="center bg-white text-dark" style="  text-align: left;
+                  border-radius: 40px;
+                  bottom: 0;
+                  color: black;
+                  padding: 10px;">
+    <div class="center">
+        <div class="" align="center">
+
+            <div class="col">
+                <img src={{profile.image.url}} alt="..." width="120" height="120"
+                     class="rounded-circle"><br>
+                <b><font style="color: #000; font-size: 20px;">{{profile.user}}</font></b><br>
+                <b><font style="color: #000; font-size: 20px;">{{profile.phone}}, {{profile.whatsapp}} </font></b>
+                <div class=" " align="center">
+                    <b><font color="white"> ({{ profile.Address }}) </font></b>
+
+                </div>
+
+            </div>
+     <div class="">
+    <table class="table text-dark" >
+        <thead>
+          <tr>
+              <th>Request Amount</th>
+              <th>Status </th>
+              <th>Request time </th>
+              <th></th>
+          </tr>
+        </thead>
+
+        <tbody style="font-size: 30px;">
+
+          <tr>
+
+            <td style="color: red;">₦ {{rpay.Amount}}</td>
+
+              <td>
+                  {% if rpay.pending == True %}
+                  <span class="bg-warning btn-sm" style="color: white;">Pending... </span>
+                  {% endif %}
+                  {% if rpay.paid == True %}
+                  <span class="bg-success btn-sm" style="color: white;"> Paid </span>
+                  {% endif %}
+                  {% if rpay.failed == True %}
+                  <span class="bg-danger btn-sm" style="color: white;"> Failed payment! </span>
+                  {% endif %}
+              </td>
+
+               <td>{{rpay.timestamp}}</td>
+
+          </tr>
+
+        </tbody>
+      </table>
+</div>
+   <br>
+        <div class="center #aa00ff accent-4" style="  text-align: left;
+                  border-radius: 30px;
+                  bottom: 0;
+                  padding: 10px;
+                  background-color: #f2f0f0;">
+                <div class="center">
+                    <font color="black" style="font-size: 20px;"> <b class=""> Account details </b> </font>
+                <div>
+                    <font color="blue" style="font-size: 40px;"><b>Account No.: {{ acct.account_number}}</b></font><br>
+                        <font color="black" style="font-size: 30px;"> Account Name.: {{ acct.account_name}}</font><br>
+                        <font color="black" style="font-size: 30px;"> Bank.: {{ acct.bank}}</font><br>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div><br>
+   <div align="center">
+{% if rpay.paid == True %}
+          Processed Request..
+{% else %}
+{% if rpay.failed == True %}
+                 Failed Request..
+{% else %}
+<a href="{% url 'paid' rpay.pk %}">
+<span class="btn-lg bg-success" style="margin:20px;">
+<font color="white" style="font-size: 20px;"> Payment Successful </font></span>
+</a>
+
+<a href="{% url 'failed' rpay.pk %}">
+<span class="btn-lg bg-danger" style="margin:20px;">
+    <font color="white" style="font-size: 20px;" > Payment Failed </font>
+</span>
+</a>
+{% endif %}
+{% endif %}
+
+
+   </div>
+
+
+</div>
+</div>
+        {% endblock %}

@@ -1,0 +1,190 @@
+{% extends "base2.html" %}
+{% block content %}
+{% load static %}
+
+<!-- Search Modal 2 -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h6 class="text-muted">Filter to find your Residential Apartment choice</h6>
+
+
+                <form class="" action="{% url 'filter_residential' %}" method="GET">
+                    {% csrf_token %}
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="inputGroupSelect01">Type</label>
+                        <select class="form-select" id="inputGroupSelect01" name="type">
+                            {% for type in type %}
+                            <option value="{{ type }}">{{type.type}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <h5>Price,NGN</h5>
+                    <div class="input-group mb-3">
+                        <div class="col">
+                            <label class="input-group-text">₦</label>
+                            <input type="text" class="form-control" placeholder="Min price" aria-label="" id="min"
+                                   name="min" value="{{ min }}">
+                        </div>
+
+                        <div class="col">
+                            <label class="input-group-text">₦</label>
+                            <input type="text" class="form-control" placeholder="Max price" aria-label="" id="max"
+                                   name="max" value="{{ max }}">
+                        </div>
+                    </div>
+
+
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="inputGroupSelect03">Location</label>
+                        <select class="form-select" id="inputGroupSelect03" name="location">
+                            {% for location in location %}
+                            <option value="{{location}}">{{location.location}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="inputGroupSelect04">Power Status</label>
+                        <select class="form-select" id="inputGroupSelect04" name="power">
+                            {% for power in power %}
+                            <option value="{{power}}">{{power.1}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="inputGroupSelect05">Water Status</label>
+                        <select class="form-select" id="inputGroupSelect05" name="power">
+                            {% for water in water %}
+                            <option value="{{water}}">{{water.1}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div align="center">
+                        <button type="submit" class="btn btn-success">Show Filter</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row infinite-container" align="center">
+        {% for apartment in apartment %}
+        <div class="col infinite-item">
+            <div class="card mt-2 shadow-sm p-0 mb-2 bg-body rounded"
+                 style="max-width: 24rem; min-width: 20rem; border-bottom-width: medium; border-bottom-color: #1abc9c;">
+                <a href="{% url 'residential_details' apartment.pk %}">
+                    <img src={{apartment.font_image.url}} style="max-height:200px;" class="card-img-top" alt="...">
+                </a>
+                <div class="card-body">
+                    <h4 class=" text-info">{{apartment.name}}</h4>
+                    <font class="card-text"> <b>{{apartment.type}}</b></font>
+                    <p class="card-text"><b>{{apartment.location}}</b></p>
+                    <font class="card-text" style="font-size:18px;"> <b>Price: ₦{{apartment.price}} Yearly</b></font>
+                    <div class="col">
+                        {% if apartment.negotiable == True %}
+                        <h4 class="  badge rounded-pill bg-info">
+                            Negotiable
+                        </h4>
+                        {% else %}
+                        <h4 class="  badge rounded-pill bg-danger">
+                            Non Negotiable
+                        </h4>
+                        {% endif%}
+                    </div>
+                      {% if apartment.vacancy == 0 %}
+                     <h6 class="card-title" style="color:red;"> No Vacancy</h6>
+                    {% else %}
+                     <h6 class="card-title" style="color:green;">{{apartment.vacancy}} Vacancy</h6>
+                    {% endif %}
+                    <br>
+
+                    <p><a type="button" class="btn btn-dark" href="{% url 'residential_details' apartment.pk %}">
+                        More Details</a></p>
+                    <p>
+                        {% if apartment.star == 1 %}
+                        <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+                        <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+                        <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+                        <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+                        <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+                        {% elif apartment.star == 2 %}
+                        <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+                        <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+                        <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+                        <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+                        <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+                        {% elif apartment.star == 3 %}
+                        <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+                        <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+                        <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+                        <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+                        <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+                        {% elif apartment.star == 4 %}
+                        <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+                        <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+                        <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+                        <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+                        <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+                        {% elif apartment.star == 5 %}
+                        <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+                        <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+                        <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+                        <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+                        <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+                        {% endif %}
+                    </p>
+                    <a type="button" class="btn  btn-dark" href="{% url 'residential_request' apartment.pk %}">Get Apartment</a>
+                    <a type="button" class="btn btn-secondary " href="tel:{{details.phone}}">Call</a>
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+    {% if page_obj.has_next %}
+    <a class="infinite-more-link" href="?page={{ page_obj.next_page_number }}"></a>
+    {% endif %}
+    <div class="d-flex justify-content-center" style="display:block;">
+        <div class="spinner-border" role="status">
+            <span class="sr-only"></span>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="{% static 'js/jquery-2.2.4.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/infinite.min.js' %}"></script>
+<script>
+    var infinite = new Waypoint.Infinite({
+        element: $('.infinite-container')[0],
+        handler: function(direction) {
+
+    },
+    offset: 'bottom-in-view',
+
+    onBeforePageLoad: function () {
+    $('.spinner-border').show();
+    },
+    onAfterPageLoad: function () {
+    $('.spinner-border').hide();
+    }
+
+    });
+
+
+
+</script>
+
+
+{%endblock%}

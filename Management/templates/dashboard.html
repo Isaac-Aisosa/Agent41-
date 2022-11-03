@@ -1,0 +1,235 @@
+{% extends "main.html" %}
+{% block content %}
+{% load static %}
+
+<div class="text">Dashboard</div>
+<br>
+<div style="margin-left: 30px;">
+
+    <div style="display: flex; flex-direction: row; column-count: 3">
+
+        <div style="flex-direction: column; padding: 20px;">
+            <a href="{% url 'management_apartment_all'%}">
+            <div class="center #ffffff white" style="
+                  border-radius: 5px 10px 10px 5px;
+                  bottom: 0;
+                  padding: 10px;
+                  width: 300px;
+                  height: 100px;
+                  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                  border-left: 5px solid #26283d;
+                  background-color: #f2f0f0;">
+                <div style="display: flex;
+                            flex-wrap: wrap;">
+                    <p style="font-size: 18px; color:#26283d;">Residential Apartments <br> <b
+                            style="font-size: 25px; color:#000;"> {{res_apartment.count}} </b></p>
+
+                    <div style="align-items: flex-end;">
+                        <i class='bx bx-home'
+                           style=" padding:10px; font-size:50px; color:#aaaaad; position:absolute;"></i>
+                    </div>
+
+                </div>
+            </div>
+            </a>
+        </div>
+        <div style="flex-direction: column; padding: 20px;">
+             <a href="{% url 'management_apartment_all'%}">
+            <div class="center #ffffff white" style="
+                  border-radius: 5px 10px 10px 5px;
+                  bottom: 0;
+                  padding: 10px;
+                  width: 310px;
+                  height: 100px;
+                  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                  border-left: 5px solid #f53702;
+                  background-color: #f2f0f0;">
+                <div style="display: flex;
+                            flex-wrap: wrap;">
+                    <p style="font-size: 18px; color:#f53702;">Commercial Apartments <br> <b
+                            style="font-size: 25px; color:#000;"> {{com_apartment.count}} </b></p>
+
+                    <div style="align-items: flex-end;">
+                        <i class='bx bx-building'
+                           style=" padding:10px; font-size:50px; color:#aaaaad; position:absolute;"></i>
+                    </div>
+                </div>
+            </div>
+             </a>
+        </div>
+        <div style="flex-direction: column; padding: 20px;">
+            <a href="{% url 'management_res_apartment_request'%}">
+            <div class="center #ffffff white" style="
+                  border-radius: 5px 10px 10px 5px;
+                  bottom: 0;
+                  padding: 10px;
+                  width: 300px;
+                  height: 100px;
+                  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                  border-left: 5px solid #c70000;
+                  background-color: #f2f0f0;">
+                <div style="display: flex;
+                            flex-wrap: wrap;">
+                    <p style="font-size: 18px; color:#c70000; text-decoration:none;">Apartment Request<br> <b
+                            style="font-size: 25px; color:#000; text-decoration:none;"> {{apartment_request}} </b></p>
+
+                    <div style="align-items: flex-end;">
+                        <i class='bx bx-cart-alt'
+                           style=" padding:10px; font-size:50px; color:#aaaaad; position:absolute;"></i>
+                    </div>
+                </div>
+            </div>
+            </a>
+        </div>
+
+    </div>
+
+        <div style="display: flex; flex-direction: row; column-count: 3">
+
+        <div style="flex-direction: column; padding: 20px;">
+            <a href="{% url 'management_apartment_pending'%}">
+            <div class="center #ffffff white" style="
+                  border-radius: 5px 10px 10px 5px;
+                  bottom: 0;
+                  padding: 10px;
+                  width: 300px;
+                  height: 100px;
+                  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                  border-left: 5px solid #ffaf2e;
+                  background-color: #f2f0f0;">
+                <div style="display: flex;
+                            flex-wrap: wrap;">
+                    <p style="font-size: 18px; color:#ffaf2e;">Pending Apartments <br> <b
+                            style="font-size: 25px; color:#000;"> {{pending_apartment}} </b></p>
+
+                    <div style="align-items: flex-end;">
+                        <i class='bx bx-bell-plus'
+                           style=" padding:10px; font-size:50px; color:#aaaaad; position:absolute;"></i>
+                    </div>
+                </div>
+            </div>
+            </a>
+        </div>
+        <div style="flex-direction: column; padding: 20px;">
+            <a href="{% url 'agent_list'%}">
+            <div class="center #ffffff white" style="
+                  border-radius: 5px 10px 10px 5px;
+                  bottom: 0;
+                  padding: 10px;
+                  width: 310px;
+                  height: 100px;
+                  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                  border-left: 5px solid #26283d;
+                  background-color: #f2f0f0;">
+                <div style="display: flex;
+                            flex-wrap: wrap;">
+                    <p style="font-size: 18px; color:#26283d;">Registered_Act Agent41<br> <b
+                            style="font-size: 25px; color:#000;"> {{agent}} </b></p>
+
+                    <div style="align-items: flex-end;">
+                        <i class='bx bx-user-circle'
+                           style=" padding:10px; font-size:50px; color:#aaaaad; position:absolute;"></i>
+                    </div>
+                </div>
+            </div>
+            </a>
+        </div>
+        <div style="flex-direction: column; padding: 20px;">
+            <a href="{% url 'landlord_list'%}">
+            <div class="center #ffffff white" style="
+                  border-radius: 5px 10px 10px 5px;
+                  bottom: 0;
+                  padding: 10px;
+                  width: 300px;
+                  height: 100px;
+                  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                  border-left: 5px solid #025714;
+                  background-color: #f2f0f0;">
+                <div style="display: flex;
+                            flex-wrap: wrap;">
+                    <p style="font-size: 18px; color:#025714;">Registered Landlords<br> <b
+                            style="font-size: 25px; color:#000;">{{landlord}}</b></p>
+
+                    <div style="align-items: flex-end;">
+                        <i class='bx bx-user'
+                           style=" padding:10px; font-size:50px; color:#aaaaad; position:absolute;"></i>
+                    </div>
+                </div>
+            </div>
+            </a>
+        </div>
+
+    </div>
+
+            {% if agent_payment_request %}
+
+            <div style="flex-direction: column; padding: 20px;">
+                <a href="{% url 'agent_payment_request'%}">
+            <div class="center #ffffff white" style="
+                  border-radius: 5px 10px 10px 5px;
+                  bottom: 0;
+                  padding: 10px;
+                  width: 500px;
+                  height: 50px;
+                  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                  border-left: 5px solid #000117;
+                  background-color: orange;">
+                <h4>({{agent_payment_request.count}}) Agent Payment Request  </h4>
+            </div>
+                </a>
+        </div>
+
+           {% endif %}
+
+                {% if feedback %}
+
+            <div style="flex-direction: column; padding: 20px;">
+                <a href="{% url 'feedback_list'%}">
+            <div class="center #ffffff white" style="
+                  border-radius: 5px 10px 10px 5px;
+                  bottom: 0;
+                  padding: 10px;
+                  width: 500px;
+                  height: 50px;
+                  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                  border-left: 5px solid #000117;
+                  background-color: skyblue;">
+                <h4>({{feedback.count}}) Feedback  </h4>
+            </div>
+                </a>
+        </div>
+
+           {% endif %}
+
+
+            <div style="flex-direction: column; padding: 20px;">
+            <div class="center #ffffff white" style="
+                  border-radius: 5px 10px 10px 5px;
+                  bottom: 0;
+                  padding: 10px;
+                  width: 1000px;
+                  height: 900px;
+                  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                  border-left: 5px solid #000117;
+                  background-color: #f2f0f0;">
+                <div style="display: flex;
+                            flex-wrap: wrap;">
+                    <p style="font-size: 18px; color:#000117;">Analytics<br> <b
+                            style="font-size: 25px; color:#000;"> Daily Visits </b></p>
+                    <div style="align-items: flex-end;">
+                        <i class='bx bx-pie-chart-alt-2'
+                           style=" padding:10px; font-size:50px; color:#aaaaad; position:absolute;"></i>
+                    </div>
+
+                </div>
+                <h4>daily apartment request</h4>
+                    <h4>most visted apartment</h4>
+            </div>
+
+
+        </div>
+
+</div>
+
+
+{%endblock%}

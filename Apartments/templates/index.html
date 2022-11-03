@@ -1,0 +1,90 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" media="screen,projection"/>
+    <link rel="stylesheet" href="{% static 'css/mycss.css' %}" type="text/css">
+    <link rel="icon" href="{% static 'images/icon.png' %}" type="image/lxx-icon">
+     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <title>Agent41.org</title>
+</head>
+<body>
+
+<div align="center" class=" top_body"><img alt="..." class=""
+                                           height="auto" src="{% static 'images/logo1.png' %}" width="300dp">
+    <h3><font style="color:#011a4a;">Apartment Search Made Easy</font></h3>
+    <h6><font style="color:#fff;">Residential and commercial</font></h6>
+
+</div>
+
+<div class="row ">
+    <div class="col">
+        <div align="center" class="mt-0 mb-3 "><img alt="..." class=""
+                                                    height="auto" src="{% static 'images/boy.png' %}" width="250dp">
+        </div>
+        <div class="d-grid gap-3 col-7 mx-auto mt-2">
+            <a href="{% url 'select_type' %}" class="shadow p-3 btn btn-light btn-lg" type="button">Need an Apartment</a>
+        </div>
+    </div>
+    <div class="col">
+        <div align="center" class="mt-3  "><img alt="..." class=""
+                                height="auto" src="{% static 'images/elder.png' %}" width="300dp">
+        </div>
+        <div align="right" class="d-grid gap-3 col-7 mx-auto mt-4">
+            <a href="{% url 'landlord_index' %}" class="shadow p-3 btn btn-dark btn-lg" type="button">Am a landlord</a>
+        </div>
+
+    </div>
+</div><br>
+
+    <h5 class="mt-3" align="left">Contact Agent41 for more info</h5>
+
+            <div class="mt-3 " style="
+                  border-radius: 5px 50px 50px 5px;
+                  bottom: 0;
+                  padding: 10px;
+                  width: 300px;
+                  height: 150px;
+
+                  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                  border-left: 5px solid #f7f7f7;
+                  background-color: #1c1d1f">
+
+                <a  href="tel:{{details.phone}}" class=" btn btn-dark btn-sm" >
+                    <i class='bx bx-phone'  style="color:white; font-size:20px; padding:0px;"></i>
+                    Call us at Agent41
+                </a><br>
+
+                <a href="https://wa.me/{{details.whatsapp}}?text=I%20want%20to%20make%20enquiring%20about%20how%20to%20get%20apartment" class=" btn btn-success btn-sm mt-3" >
+                    <i class='bx bxl-whatsapp'  style="color:white; font-size:20px; padding:0px;"></i>
+                    Send Whatsapp Message</a>
+
+                <a href="{% url 'feedback' %}" class=" btn btn-dark btn-sm mt-3" >
+                    <i class='bx bx-message'  style="color:white; font-size:20px; padding:0px;"></i>
+                    Send Feedback</a>
+
+            </div>
+
+<div align="center" class="mt-5" style="text-align: center;
+                                                    position:relative;
+                                                    bottom:0;
+                                                    width:100%;
+                                                    height:400px;   /* Height of the footer */
+                                                    background:#272829;
+                                                     ">
+<i class='bx bxl-facebook-square'  style="color:white; font-size:30px; padding:10px;"></i> <i class='bx bxl-whatsapp'  style="color:white; font-size:30px; padding:10px;"></i>
+<i class='bx bxl-instagram'  style="color:white; font-size:30px; padding:10px;"></i> <i class='bx bxl-play-store'  style="color:white; font-size:30px; padding:10px;"></i>
+    <p class=""><font style="color:#fff; font-size:18px; font-style: oblique;">Get The Best <b style="color:#0a53f2;">Apartment</b> <br> Search Experiences<br> We are With You till You
+        <br>Get Your  <b style="color:#0a53f2;" > Taste </b></font></p>
+    <p><font style="color:#fff;">All Right Reserved agent41.org &#169; 2021</font></p>
+
+</div>
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script type="text/javascript" src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

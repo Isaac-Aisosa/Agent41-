@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" xmlns="http://www.w3.org/1999/html">
+  <div class="container-fluid">
+      <a class="navbar-brand" href="#">Agent41.org <font style="color:skyblue;">Revenue Management</font></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Database</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Revenue Filter
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#">Daily Revenue</a></li>
+            <li><a class="dropdown-item" href="#">Weekly Revenue</a></li>
+            <li><a class="dropdown-item" href="#">Monthly Revenue</a></li>
+            <li><a class="dropdown-item" href="#">Yearly Revenue</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Daily Expenses</a></li>
+            <li><a class="dropdown-item" href="#">Weekly Expenses</a></li>
+            <li><a class="dropdown-item" href="#">Monthly Expenses</a></li>
+            <li><a class="dropdown-item" href="#">Yearly Expenses</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Debtors</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container mt-5">
+
+<div class="row">
+    <div class="col">
+  <div class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
+  <div class="card-header"> <i class='bx bx-dollar-circle' style="font-size:30;" ></i></div>
+  <div class="card-body">
+    <h5 class="card-title">Service Fee Today</h5>
+    <p class="card-text"><b>
+      {% if d_service %}
+     ₦ {{d_service}}
+      {% else %}
+      Nothing has been made today
+      {% endif %}
+    </b> </p>
+  </div>
+</div>
+    </div>
+
+
+      <div class="col">
+  <div class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
+  <div class="card-header"> <i class='bx bx-dollar-circle' style="font-size:30;" ></i></div>
+  <div class="card-body">
+    <h5 class="card-title">Agent Fee Today</h5>
+    <p class="card-text"><b>
+      {% if d_agent %}
+      ₦ {{d_agent}}
+      {% else %}
+      Nothing has been made today
+      {% endif %}
+    </b></p>
+  </div>
+</div>
+    </div>
+
+      <div class="col">
+  <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+  <div class="card-header"> <i class='bx bx-dollar-circle' style="font-size:30;" ></i></div>
+  <div class="card-body">
+    <h5 class="card-title">Weekly Service Fee</h5>
+    <p class="card-text">5,000,000</p>
+  </div>
+</div>
+    </div>
+
+<div class="col">
+  <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+  <div class="card-header"> <i class='bx bx-dollar-circle' style="font-size:30;" ></i></div>
+  <div class="card-body">
+    <h5 class="card-title">Weekly Agent Fee</h5>
+    <p class="card-text">75,000,000</p>
+  </div>
+</div>
+</div>
+
+</div>
+
+  <div class="card text-white bg-dark border-success mb-3 mt-5" style="max-width: 85rem;">
+  <div class="card-header"> <i class='bx bx-dollar-circle' style="font-size:30;" ></i></div>
+  <div class="card-body">
+    <h5 class="card-title">Total Estimated Revenue From Agent Fees per Apartment at {{pricing.percentage}}%</h5>
+    <h3 class="card-text text-success"> ₦ {{percent}}</h3>
+  </div>
+</div>
+
+    <div class="card text-dark bg-light border-warning mb-3 mt-5" style="max-width: 85rem;">
+  <div class="card-header"> <i class='bx bx-dollar-circle' style="font-size:30;" ></i></div>
+  <div class="card-body">
+    <h5 class="card-title">Total Estimated Revenue From Service Fees per Apartment vacancy at ₦{{pricing.service_fee}}</h5>
+    <h3 class="card-text text-warning"> ₦ {{service}}</h3>
+  </div>
+</div>
+
+<div class="card text-white bg-dark bg-dark border-info mb-3 mt-5" style="max-width: 85rem;">
+  <div class="card-header"> <i class='bx bx-dollar-circle' style="font-size:30;" ></i></div>
+  <div class="card-body">
+    <h5 class="card-title">Total Estimated Revenue</h5>
+    <h3 class="card-text text-info"> ₦ {{est_revenue}}</h3>
+  </div>
+</div>
+
+
+ <div class="row mt-5">
+    <div class="col">
+  <div class="card text-dark bg-light border-warning mb-3" style="max-width: 40rem;">
+  <div class="card-header"> <i class='bx bx-dollar-circle' style="font-size:30;" ></i></div>
+  <div class="card-body">
+    <h5 class="card-title">Daily Expenses</h5>
+    <h3 class="card-text text-warning"> ₦ {{d_total}}</h3>
+  </div>
+</div>
+    </div>
+<div class="col">
+  <div class="card text-white bg-secondary mb-3" style="max-width: 40rem;">
+  <div class="card-header"> <i class='bx bx-dollar-circle' style="font-size:30;" ></i></div>
+  <div class="card-body">
+    <h5 class="card-title"> Weekly Expenses so far</h5>
+    <p class="card-text">0</p>
+  </div>
+</div>
+</div>
+
+     <div class="card text-dark bg-light border-primary  mb-3 mt-5" style="max-width: 85rem;">
+  <div class="card-header"> <i class='bx bx-dollar-circle' style="font-size:30;" ></i></div>
+  <div class="card-body">
+    <h5 class="card-title">Total Revenue Generated</h5>
+    <h2 class="card-text text-primary"> ₦ {{revenue}}</h2>
+  </div>
+</div>
+
+
+  <div class="card text-white bg-dark border-primary mb-3 mt-5" style="max-width: 85rem;">
+  <div class="card-header"> <i class='bx bx-dollar-circle' style="font-size:30;" ></i></div>
+  <div class="card-body">
+    <h5 class="card-title">Revenue Balance</h5>
+    <h2 class="card-text text-primary"> ₦ {{a_revenue}}</h2>
+  </div>
+</div>
+
+
+</div>
+
+  <div class="card text-dark bg-light border-danger mb-3 mt-5" style="max-width: 85rem;">
+  <div class="card-header"> <i class='bx bx-dollar-circle' style="font-size:30;" ></i></div>
+  <div class="card-body">
+    <h5 class="card-title">Total Estimated Expenses For the monthly</h5>
+    <p class="card-text">75,000,000</p>
+  </div>
+</div>
+
+
+
+
+
+</div>
+
+{% endblock content %}

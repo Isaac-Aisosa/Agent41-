@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+<div class="container">
+ <div align="center">
+     <div class="container mt-3" align="center" >
+<div class="card text-white bg-dark mb-3" style="max-width: 60rem; min-width: 18rem;">
+  <div class="card-header"> <h5>Apartment Photos</h5></div>
+  <div class="">
+  <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel" align="center">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+         <span class="position-absolute badge rounded-pill bg-info">
+        1/8 Photos </span>
+      <img src={{apartment.font_image.url}}
+           class="img-fluid"
+           style="max-height:500px;"
+            alt="...">
+    </div>
+
+    <div class="carousel-item">
+        <span class="position-absolute badge rounded-pill bg-info">
+        2/8 Photos </span>
+      <img src={{apartment.side_image.url}} style="max-height:500px;" class="img-fluid" alt="...">
+    </div>
+    <div class="carousel-item">
+       <span class="position-absolute badge rounded-pill bg-info">
+        3/8 Photos </span>
+      <img src={{apartment.Room1_image.url}} style="max-height:500px;" class="img-fluid" alt="...">
+    </div>
+
+    <div class="carousel-item">
+        <span class="position-absolute badge rounded-pill bg-info">
+        4/8 Photos </span>
+      <img src={{apartment.Room2_image.url}} style="max-height:500px;" class="img-fluid" alt="...">
+    </div>
+
+     <div class="carousel-item">
+        <span class="position-absolute badge rounded-pill bg-info">
+        5/8 Photos </span>
+      <img src={{apartment.kitchen_image.url}} style="max-height:500px;" class="img-fluid" alt="...">
+    </div>
+
+     <div class="carousel-item">
+       <span class="position-absolute badge rounded-pill bg-info">
+        6/8 Photos </span>
+      <img src={{apartment.Rest_room.url}} style="max-height:500px;" class="img-fluid"  alt="...">
+    </div>
+
+    <div class="carousel-item">
+       <span class="position-absolute badge rounded-pill bg-info">
+        7/8 Photos </span>
+      <img src={{apartment.other_image.url}} style="max-height:500px;" class="img-fluid" alt="...">
+    </div>
+
+     <div class="carousel-item">
+       <span class="position-absolute badge rounded-pill bg-info">
+        8/8 Photos </span>
+      <img src={{apartment.other_image2.url}} style="max-height:500px;" class="img-fluid" alt="...">
+    </div>
+
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+   </div>
+  </div>
+</div>
+        <h4 class=" text-info">{{apartment.name}}</h4>
+         <font class="card-text" style="font-size:20px;"> <b>{{apartment.type}}</b></font>
+         <p class="card-text" style="font-size:20px;"> <b>{{apartment.location}}</b></p>
+
+         <font class="card-text" style="font-size:18px;"> <b>Price: ₦{{apartment.price}} Yearly</b></font>
+         <div class="col">
+           {% if apartment.negotiable == True %}
+        <h4 class="  badge rounded-pill bg-info">
+              Negotiable
+        </h4>
+           {% else %}
+       <h4 class="  badge rounded-pill bg-danger">
+              Non Negotiable
+        </h4>
+           {% endif%}
+        </div><br>
+
+      <div align="center">
+          <h6><b>Power Status</b></h6>
+          <h6 class="text-dark">{{apartment.power}}</h6>
+     </div><br>
+
+       <div class="card border-dark mb-3" style="max-width: 60rem; min-width: 18rem;" align="center">
+
+      <div class="card-header"> <h5>Apartment Description</h5></div>
+      <div class="card-body">
+        {{apartment.description}}
+      </div>
+      </div>
+
+                  <a type="button" class="btn  btn-dark" href="{% url 'commercial_request' apartment.pk %}">Get Apartment</a>
+                  <a type="button" class="btn btn-secondary " href="tel:{{details.phone}}">Call</a>
+
+         <p>
+           {% if  apartment.star == 1 %}
+         <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+          {% elif apartment.star == 2 %}
+          <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+           {% elif apartment.star == 3 %}
+          <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+          {% elif apartment.star == 4 %}
+          <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+           {% elif apartment.star == 5 %}
+          <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+          {% endif %}
+         </p>
+     </div>
+    </div>
+  </div><br><br>
+
+ <div align="center" style="
+   position:relative;
+   bottom:0;
+   width:100%;
+   height:400px;   /* Height of the footer */
+   background:#272829;">
+         <br><br>
+    <p class=""><font style="color:#fff; font-size:18px; font-style: oblique;">Get The Best <b style="color:#0a53f2;">Apartment</b> <br> Search Experiences<br> We are With You till You
+        <br>Get Your  <b style="color:#0a53f2;" > Taste </b></font></p>
+    <p><font style="color:#fff;">All Right Reserved agent41.org &#169; 2021</font></p>
+</div>
+
+
+
+{%endblock%}

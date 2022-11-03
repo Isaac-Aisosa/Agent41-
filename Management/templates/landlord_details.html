@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+<div class="container mt-5" align="center">
+ <div class="card text-white bg-dark mb-3" style="max-width: 25rem;"  align="center" >
+
+  <div class="card-header"> <h5><b>Landlord Detail</b>
+                           </h5></div>
+  <div class="card-body">
+     <div class="row" align="center">
+         <img src={{landlord.image.url}} alt="..." width="100" height="auto" class="">
+
+         <h4 class="mt-2">@{{landlord.user}}</h4>
+         <h5>{{landlord.full_name}}</h5>
+         <h6>Address</h6>
+         <h5>{{landlord.Address}}</h5>
+            <div class="mt-3 " style="
+                  border-radius: 5px 50px 50px 5px;
+                  bottom: 0;
+                  padding: 10px;
+                  width: 300px;
+                  height: 100px;
+
+                  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+                  background-color: #1c1d1f">
+
+                <a  href="tel:{{landlord.phone}}" class=" btn btn-dark btn-sm" >
+                    <i class='bx bx-phone'  style="color:white; font-size:20px; padding:0px;"></i>
+                    Call {{landlord.phone}}
+                </a><br>
+
+                <a href="https://wa.me/{{landlord.whatsapp}}?text=ask%20question" class=" btn btn-success btn-sm mt-3" >
+                    <i class='bx bxl-whatsapp'  style="color:white; font-size:20px; padding:0px;"></i>
+                    Whatsapp {{landlord.whatsapp}}</a>
+
+            </div>
+
+     </div>
+  </div>
+ </div>
+
+  <div class="card text-white bg-light mb-3" style="max-width: 100rem;"  align="center" >
+  <div class="card-header"> <h5 class="text-dark"><b>Landlord Residential Apartments</b>
+    </h5></div>
+  <div class="card-body">
+      <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">S/N</th>
+      <th scope="col">Apartment Name</th>
+      <th scope="col">Type</th>
+      <th scope="col">Price</th>
+      <th scope="col">Location</th>
+      <th scope="col">Reg_date</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+   {% for apartment in res_apartment %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>{{apartment.name}}</td>
+      <td>{{apartment.type}}</td>
+      <td>₦{{apartment.price}}</td>
+      <td>{{apartment.location}}</td>
+      <td>{{apartment.timestamp}}</td>
+      <td><a type="button" href="{% url 'management_res_apartment_detail' apartment.pk %}" class="btn  btn-primary">Details</a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+  </div>
+ </div>
+
+<div class="card text-white bg-light mb-3" style="max-width: 100rem;"  align="center" >
+  <div class="card-header"> <h5 class="text-dark"><b>Landlord Commercial Apartments</b>
+    </h5></div>
+  <div class="card-body">
+      <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">S/N</th>
+      <th scope="col">Apartment Name</th>
+      <th scope="col">Type</th>
+      <th scope="col">Price</th>
+      <th scope="col">Location</th>
+      <th scope="col">Reg_date</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+   {% for apartment in comm_apartment %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>{{apartment.name}}</td>
+      <td>{{apartment.type}}</td>
+      <td>₦{{apartment.price}}</td>
+      <td>{{apartment.location}}</td>
+      <td>{{apartment.timestamp}}</td>
+      <td><a type="button" href="{% url 'management_comm_apartment_detail' apartment.pk %}" class="btn  btn-primary">Details</a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+  </div>
+ </div>
+
+
+
+</div>
+
+
+
+
+
+
+{% endblock content %}

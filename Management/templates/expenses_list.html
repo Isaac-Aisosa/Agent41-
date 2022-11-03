@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<div class="collapse" id="navbarToggleExternalContent">
+    <div class="bg-dark p-4">
+        <h5 class="text-white h4">Agent41.org</h5>
+        <span class="text-muted">Connect you to better clients</span>
+    </div>
+</div>
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>
+
+
+
+<div class="container mt-3 " align="center">
+       <div align="left">
+       <a href="{% url 'dashboard'%}">
+          <i class='bx bx-grid-alt text-info' style="font-size: 30px"></i>
+          <span class="text-info" style="font-size: 30px">Dashboard</span>
+       </a>
+    </div>
+
+    <div align="right">
+    <a type="button" href="{% url 'add_expenses'%}" class="btn  btn-primary" >Add Expenses</a>
+         <a type="button" href="{% url 'expenses_all'%}" class="btn  btn-primary" >Check All Expenses</a>
+    </div>
+    <h4 style="color:gray;">
+        Daily Expenses
+    </h4>
+
+    <span class="btn  btn-warning" >Total: ₦{{total}}</span>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">S/N</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Purpose</th>
+      <th scope="col">Auth by</th>
+      <th scope="col">Time</th>
+
+    </tr>
+  </thead>
+  <tbody>
+   {% for expenses in expenses %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>NGN {{expenses.amount}}</td>
+      <td>{{expenses.purpose}}</td>
+      <td>{{expenses.user}}</td>
+      <td>{{expenses.timestamp}}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+</div>
+
+{% endblock content %}

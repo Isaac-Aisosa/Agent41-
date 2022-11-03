@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<div class="container mt-5 " align="center">
+
+  <div class="mb-5 bg-white border-dark text-dark rounded" style="width: 20rem;">
+    <br>
+   <div align="center " >  <img alt="..." class="rounded-circle"
+          height="100dp" src="{% static 'images/logo1.png' %}" width="200dp"></a></div>
+        <h3>Feedback Sent  <i class='bx bx-check-circle'  style="color:green; font-size:50px; padding:0px;"></i></h3>
+       <p>Thanks for sending us your feedback, we ensure to serve you better.</p>
+      <h3>Go to home <br>
+           <a href="{% url 'index' %}" class=" btn btn-dark btn-sm mt-3" >
+          <i class='bx bx-home'  style="color:skyblue; font-size:50px; padding:0px;"></i>
+           </a>
+      </h3>
+    <br>
+  </div>
+</div>
+
+{%endblock%}

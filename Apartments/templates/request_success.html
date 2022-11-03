@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+<div class="container mt-5" align="center">
+
+    <h5>Your request was Successful</h5>
+    <h5>call us at Agent41 to get more info..</h5>
+            <h6 align="center" style="">
+            <a type="button" href="tel:{{agent41_details.phone}}" class="btn  btn-primary">
+            <i class='bx bx-phone' style="color:white; font-size:20px; padding:0px;"></i>
+            Call</a>
+            <br></h6>
+           <a type="button" href="{% url 'index'%}" class="btn  btn-dark">
+            <i class='bx bx-home' style="color:white; font-size:20px; padding:0px;"></i>
+            Go to Home</a>
+</div>
+
+{% endblock%}

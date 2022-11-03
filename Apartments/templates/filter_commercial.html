@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+    <div class="bg-light" style="border-bottom-width: thick; border-bottom-color: #1abc9c;">
+    <h4 align="center" class="p-3">Found {{combined_results.count}} Commercial Apartment</h4>
+    </div>
+
+
+<div class="container" style="background-color: #fffffff;">
+ <div class="row" align="center">
+     {% for apartment in  combined_results %}
+   <div class="col">
+    <div class="card mt-2 shadow-sm p-0 mb-2 bg-body rounded" style="max-width: 24rem; min-width: 20rem; border-bottom-width: medium; border-bottom-color: #1abc9c;">
+        <a href="{% url 'commercial_details' apartment.pk %}">
+     <img src={{apartment.font_image.url}} style="max-height:200px;" class="card-img-top" alt="...">
+        </a>
+     <div class="card-body">
+        <h4 class=" text-info">{{apartment.name}}</h4>
+         <font class="card-text"> <b>{{apartment.type}}</b></font>
+         <p class="card-text"> <b>{{apartment.location}}</b></p>
+         <font class="card-text" style="font-size:18px;"> <b>Price: ₦{{apartment.price}} Yearly</b></font>
+                  <div class="col">
+           {% if apartment.negotiable == True %}
+        <h4 class="  badge rounded-pill bg-info">
+              Negotiable
+        </h4>
+           {% else %}
+       <h4 class="  badge rounded-pill bg-danger">
+              Non Negotiable
+        </h4>
+           {% endif%}
+        </div><br>
+
+       <p><a type="button" class="btn btn-dark" href="{% url 'commercial_details' apartment.pk %}">
+       More Details</a></p>
+         <p>
+           {% if  apartment.star == 1 %}
+         <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+          {% elif apartment.star == 2 %}
+          <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+           {% elif apartment.star == 3 %}
+          <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+          {% elif apartment.star == 4 %}
+          <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+           {% elif apartment.star == 5 %}
+          <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+          <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+          {% endif %}
+         </p>
+                    <a type="button" class="btn  btn-dark" href="{% url 'commercial_request' apartment.pk %}">Get Apartment</a>
+                    <a type="button" class="btn btn-secondary " href="tel:{{details.phone}}">Call</a>
+
+     </div>
+    </div>
+  </div>
+        {% endfor %}
+
+</div>
+
+
+
+
+
+
+
+</div>
+
+
+
+{% endblock%}

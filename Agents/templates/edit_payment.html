@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+<div  style="background-color: #ffffff;">
+    <div class="container">
+        <br>
+        <h5>Make changes to your payment Details/h5><br>
+
+<div class="container mt-3" align="center">
+    <div class="card text-white bg-dark mb-3" style="max-width: 30rem;">
+
+            <form action="" method="post"
+              enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ payment_edit_form.as_p }}
+            {{ payment_edit_form.errors }}
+            <!--To redirect user to prvious page after post req-->
+            <input type="hidden" name="next" value="{{ request.GET.next }}">
+
+               <button type="submit" class="btn-lg bg-info">
+                    save</button>
+
+        </form>
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock %}
+

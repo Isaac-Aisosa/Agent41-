@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<div class="collapse" id="navbarToggleExternalContent">
+    <div class="bg-dark p-4">
+        <h5 class="text-white h4">Agent41.org</h5>
+        <span class="text-muted">Connect you to better clients</span>
+    </div>
+</div>
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>
+
+
+<div class="container mt-3 " align="center">
+      <div align="left">
+       <a href="{% url 'dashboard'%}">
+          <i class='bx bx-grid-alt text-info' style="font-size: 30px"></i>
+          <span class="text-info" style="font-size: 30px">Dashboard</span>
+       </a>
+    </div>
+
+    <h3>Apartment with no vacancy</h3>
+
+    <div class="btn-group mb-3" role="group" aria-label="Basic radio toggle button group">
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+        <label class="btn btn-outline-info" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+               aria-controls="collapseOne" for="btnradio1">({{ res_apartment.count }})Residential Apartment</label>
+
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+        <label class="btn btn-outline-info" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+               aria-controls="collapseTwo"
+               for="btnradio2">({{ comm_apartment.count }})Commercial Apartment</label>
+
+    </div>
+
+    <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                        aria-expanded="true" aria-controls="collapseOne">
+                    <b class="text-dark">All Residential Apartments</b>
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+
+                    <div class="list-group">
+                        {% if res_apartment %}
+                        {% for apartment in res_apartment%}
+                        <a href="{% url 'management_res_apartment_detail' apartment.pk %}" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">{{apartment.name}}</h5>
+                                <small class="text-muted">Registered by {{apartment.user}}<br>{{apartment.timestamp}}<br>
+                                    {% if apartment.approved == True %}
+                                     <b style="color: green; font-size: 16px;"> Approved by {{apartment.approved_by}}</b>
+                                    {% endif %}
+
+                                     {% if apartment.unapproved == True %}
+                                     <b style="color: red; font-size: 16px;"> Unapproved by {{apartment.approved_by}}</b>
+                                    {% endif %}
+
+                                </small>
+
+                            </div>
+                            <p class="mb-1" align="left"><b>{{apartment.type}}</b></p>
+                            <p class="text-muted" align="left">₦ {{apartment.price}} Yearly</p>
+                        </a>
+                       {% endfor %}
+                        {% else %}
+                        <h4>No Residential Apartment</h4>
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    <b class="text-dark">All Commercial Apartments</b>
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                        <div class="list-group">
+                            {% if comm_apartment %}
+                        {% for apartment in comm_apartment%}
+                        <a href="{% url 'management_comm_apartment_detail' apartment.pk %}" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">{{apartment.name}}</h5>
+                                <small class="text-muted">Registered by {{apartment.user}}<br>{{apartment.timestamp}}<br>
+                                    {% if apartment.approved == True %}
+                                    <b style="color: green; font-size: 16px;"> Approved by {{apartment.approved_by}}</b>
+                                    {% endif %}
+
+                                     {% if apartment.unapproved == True %}
+                                     <b style="color: red; font-size: 16px;"> Unapproved by {{apartment.approved_by}}</b>
+                                    {% endif %}
+
+                                </small>
+
+                            </div>
+                            <p class="mb-1" align="left"><b>{{apartment.type}}</b></p>
+                            <p class="text-muted" align="left">₦ {{apartment.price}} Yearly</p>
+                        </a>
+                       {% endfor %}
+                        {% else %}
+                        <h4>No Commercial Apartment </h4>
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+{% endblock content %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+<div class="container mt-5" align="center">
+
+    <h5>You are requesting for <b>{{apartment.name}}</b> Commercial  Apartment </h5>
+
+  <div class="shadow p-3 mb-5 bg-body rounded" style="width: 20rem;"  align="center">
+  <div class="card-body">
+<form class="" action="{% url 'get_commercial_apartment' %}" method="GET">
+    {% csrf_token %}
+        <b>Whats your name?</b>
+        <input type="text" class="form-control" id="name" placeholder="your full name" name="name" value="{{ name }}">
+
+       <br><b>We need your phone number to contact you?</b>
+        <input type="tel" class="form-control" id="phone" placeholder="phone number" name="phone" value="{{ phone }}">
+
+        <input type="hidden" id="apartment" name="apartment" value = {{apartment.pk}}>
+
+           <br><button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+    </div>
+</div>
+
+{% endblock%}

@@ -1,0 +1,258 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<div class="collapse" id="navbarToggleExternalContent">
+    <div class="bg-dark p-4">
+        <h5 class="text-white h4">Agent41.org</h5>
+        <span class="text-muted">Connect you to better clients</span>
+    </div>
+</div>
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>
+
+<div class="container mt-3 " style="width: 60rem;">
+    <div class="shadow-lg p-3 mb-5 bg-body rounded">
+
+        <h5 style="color:gray;" align="center">Apartment Request Details</h5>
+        <h5 style="color:gray;">Client Name: {{apartment_request.client}} </h5>
+        <h4 style="color:green;">Contact: {{apartment_request.phone}}</h4>
+
+        <a type="button" href="tel:{{apartment_request.phone}}" class="btn  btn-primary">
+            <i class='bx bx-phone' style="color:white; font-size:20px; padding:0px;"></i>
+            Call Client
+        </a>
+
+      <a type="button" class="btn  btn-success"
+           href="https://wa.me/+234{{apartment_request.phone}}?
+          text=Congratulations!%20{{apartment_request.client}}%20,%20{{apartment.name}}%20({{apartment.type}})%20located%20at%20{{apartment.location}}%20has%20been%20confirmed%20available%20and%20has%20been%20reserved%20for%20you,%20Apartment%20cost is:%20₦{{apartment.price}}%20Yearly%20kindly%20visit%20our%20office%20at%20:%20{{agent41_details.address}}%20with%20a%20service%20fee%20of%20₦{{agent41_pricing.service_fee}}%20only.%20thank%20you.%20You%20can%20also%20call%20Agent41%20on%20{{agent41_details.phone}}%20or%20visit%20our%20website:%20{{agent41_details.web_address}}%20">
+            <i class='bx bxl-whatsapp' style="color:white; font-size:20px; padding:0px;"></i>
+            Send Available </a>
+
+        <a type="button" class="btn  btn-danger"
+           href="https://wa.me/+234{{apartment_request.phone}}?
+          text=Sorry!%20{{apartment_request.client}}%20,%20{{apartment.name}}%20({{apartment.type}})%20located%20at%20{{apartment.location}}%20has%20been%20confirmed%20unavailable%20and%20You%20can%20kindly%20visit%20our%20office%20at%20:%20{{agent41_details.address}}%20so%20we%20can%20help%20find%20another%20apartment%20that%20suit%20your%20taste%20%20or%20visit%20our%20website:%20{{agent41_details.web_address}}%20and%20get%20another%20apartment%20thank%20you.%20%20You%20can%20also%20call%20Agent41%20on%20{{agent41_details.phone}}%20">
+            <i class='bx bxl-whatsapp' style="color:white; font-size:20px; padding:0px;"></i>
+            Send Unavailable
+        </a>
+
+        <h6 style="color:gray;">If Apartment is avaliable click Avaliable button<br>
+            to Whatsapp Client or click the Unavaliable button</h6>
+
+        <div align="right">
+            {% if apartment_request.comfirmed == True %}
+            <a type="button" class="btn  btn-success" href="">Confirmed</a>
+            <h6 style="color:gray;">Confirmed By {{apartment_request.user}}</h6>
+            {% else %}
+            <a type="button" href="{% url 'confirm_apartment_comm' apartment_request.pk %}" class="btn  btn-secondary">Confirm
+                Request</a>
+            <h6 style="color:gray;">Click to confirm request</h6>
+            {% endif %}
+
+        </div>
+        <hr>
+        <h5 align="center" style="color:gray;">Apartment Details</h5>
+        <h5 align="center" style="color:gray;">
+            Apartment was Registered By
+            {% if apartment.user.Reg_by.landlord == True %}
+            <span class="badge bg-warning">Landlord</span>
+            {% elif apartment.user.Reg_by.agent == True %}
+            <span class="badge bg-primary">Agent</span>
+            {% elif apartment.user.Reg_by.staff == True %}
+            <span class="badge bg-danger">Staff</span>
+            {% elif apartment.user.Reg_by.admin == True %}
+            <span class="badge bg-secondary">Admin</span>
+            {% endif %}
+        </h5>
+        <h6 align="center">username: @{{apartment.user}}/Fullname: {{apartment.user.Reg_by.full_name}}</h6>
+        <h6 align="center" style="">
+            <a type="button" href="tel:{{apartment.user.Reg_by.phone}}" class="btn  btn-primary">
+            <i class='bx bx-phone' style="color:white; font-size:20px; padding:0px;"></i>
+            Call</a>
+            <br><b style="color:green; font-size:30px;">{{apartment.user.Reg_by.phone}}
+            ,
+            {{apartment.user.Reg_by.whatsapp}}</b></h6>
+
+        <hr>
+        <div align="center">
+            <h3 class=" text-info">{{apartment.name}}</h3>
+            <h5 class=" text-dark">
+                {% if apartment.landlord_name %}
+                {% if apartment.landlord == True %}
+                <span class="badge bg-warning">Landlord</span>
+                {% endif %}
+                {% if apartment.care_taker == True %}
+                <span class="badge bg-dark">Care Taker</span>
+                {% endif %}
+                {{apartment.landlord_name}}
+                {% endif %}
+            </h5>
+            <h4 class=" text-dark">
+                {% if apartment.landlord_phone %}
+                <a type="button" href="tel:{{apartment.landlord_phone}}" class="btn  btn-primary">
+                    <i class='bx bx-phone' style="color:white; font-size:20px; padding:0px;"></i>
+                    Call
+                </a>
+                {{apartment.landlord_phone}}
+                {% endif %}
+            </h4>
+            <font class="card-text" style="font-size:20px;"> <b>{{apartment.type}}</b></font>
+            <br><font class="card-text text-info" style="font-size:20px;"> <b>Vacancy: {{apartment.vacancy}}</b></font>
+            <p class="card-text" style="font-size:20px;"><b>{{apartment.location}}</b></p>
+            <h5>Apartment Address: <b style="color:red;">{{apartment.Address}}</b></h5>
+
+            <font class="card-text" style="font-size:18px;"> <b>Price: ₦{{apartment.price}} Yearly</b></font>
+            <h6 class="text-danger">Agency Fee {{pricing.percentage}}%</h6>
+        <h3 class="text-success">₦ {{percent}}</h3>
+            <div class="col">
+                {% if apartment.negotiable == True %}
+                <h4 class="  badge rounded-pill bg-info">
+                    Negotiable
+                </h4>
+                {% else %}
+                <h4 class="  badge rounded-pill bg-danger">
+                    Non Negotiable
+                </h4>
+                {% endif%}
+            </div>
+            <br>
+        </div>
+        <hr>
+
+        <div class="card text-white bg-dark mb-3" style="max-width: 60rem; min-width: 18rem;">
+            <div class="card-header"><h5>Apartment Photos</h5></div>
+            <div class="">
+                <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel"
+                     align="center">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+         <span class="position-absolute badge rounded-pill bg-info">
+        1/8 Photos </span>
+                            <img src={{apartment.font_image.url}}
+                                 class="img-fluid"
+                                 style="max-height:500px;"
+                                 alt="...">
+                        </div>
+
+                        <div class="carousel-item">
+        <span class="position-absolute badge rounded-pill bg-info">
+        2/8 Photos </span>
+                            <img src={{apartment.side_image.url}} style="max-height:500px;" class="img-fluid" alt="...">
+                        </div>
+                        <div class="carousel-item">
+       <span class="position-absolute badge rounded-pill bg-info">
+        3/8 Photos </span>
+                            <img src={{apartment.Room1_image.url}} style="max-height:500px;" class="img-fluid"
+                                 alt="...">
+                        </div>
+
+                        <div class="carousel-item">
+        <span class="position-absolute badge rounded-pill bg-info">
+        4/8 Photos </span>
+                            <img src={{apartment.Room2_image.url}} style="max-height:500px;" class="img-fluid"
+                                 alt="...">
+                        </div>
+
+                        <div class="carousel-item">
+        <span class="position-absolute badge rounded-pill bg-info">
+        5/8 Photos </span>
+                            <img src={{apartment.kitchen_image.url}} style="max-height:500px;" class="img-fluid"
+                                 alt="...">
+                        </div>
+
+                        <div class="carousel-item">
+       <span class="position-absolute badge rounded-pill bg-info">
+        6/8 Photos </span>
+                            <img src={{apartment.Rest_room.url}} style="max-height:500px;" class="img-fluid" alt="...">
+                        </div>
+
+                        <div class="carousel-item">
+       <span class="position-absolute badge rounded-pill bg-info">
+        7/8 Photos </span>
+                            <img src={{apartment.other_image.url}} style="max-height:500px;" class="img-fluid"
+                                 alt="...">
+                        </div>
+
+                        <div class="carousel-item">
+       <span class="position-absolute badge rounded-pill bg-info">
+        8/8 Photos </span>
+                            <img src={{apartment.other_image2.url}} style="max-height:500px;" class="img-fluid"
+                                 alt="...">
+                        </div>
+
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade"
+                            data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade"
+                            data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" align="center">
+            <div class="col">
+                <h6><b>Power Status</b></h6>
+                <h6 class="text-dark">{{apartment.power}}</h6>
+
+            </div>
+
+        </div>
+
+        <div class="card border-dark mb-3" style="max-width: 60rem; min-width: 18rem;" align="center">
+
+            <div class="card-header"><h5>Apartment Description</h5></div>
+            <div class="card-body">
+                {{apartment.description}}
+            </div>
+        </div>
+
+        <p align="center">
+            {% if apartment.star == 1 %}
+            <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+            <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+            <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+            <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+            <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+            {% elif apartment.star == 2 %}
+            <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+            <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+            <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+            <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+            <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+            {% elif apartment.star == 3 %}
+            <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+            <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+            <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+            <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+            <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+            {% elif apartment.star == 4 %}
+            <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+            <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+            <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+            <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+            <img alt="..." class="" height="auto" src="{% static 'images/star-outline.png' %}" width="25dp">
+            {% elif apartment.star == 5 %}
+            <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+            <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+            <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+            <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+            <img alt="..." class="" height="auto" src="{% static 'images/star.png' %}" width="25dp">
+            {% endif %}
+        </p>
+    </div>
+</div>
+
+
+{% endblock content %}

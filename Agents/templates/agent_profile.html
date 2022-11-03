@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<div class="collapse" id="navbarToggleExternalContent">
+    <div class="bg-dark p-4">
+        <h5 class="text-white h4">Agent41.org</h5>
+        <span class="text-muted">Register More Apartment Make More Money </span>
+    </div>
+</div>
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>
+
+
+<div class="container mt-3" align="center">
+    <div class="card text-white bg-dark mb-3" style="max-width: 30rem;">
+        <div class="card-body">
+              <h6>Your balance</h6>
+            <h4>NGN</h4>
+            <h4>₦ {{wallet}}</h4>
+
+            </div>
+        </div>
+
+
+        <div class="card text-dark bg-light border-primary mb-3" style="max-width: 30rem; height: 8rem;">
+        <div class="card-body" align="left">
+            {% if wallet >= pay_threshold%}
+            <a href="{% url 'requestpay' %}">
+            <span class="bg-primary btn-sm" style="color: white;">Withdraw</span>
+           </a>
+            {% endif %}
+
+            {% if wallet < pay_threshold %}
+            <br>
+            <span class="bg-secondary btn-sm" style="color: white;">Your balance is below ₦{{pay_threshold}}</span>
+            {% endif %}
+
+            {% for p_request in p_request %}
+            {% if p_request.pending == True %}
+            <br>
+            <span class="bg-warning btn-sm" style="color: white;">Payment is pending it take about 24hours</span>
+            {% endif %}
+            {% endfor %}
+
+           {% for p_request in p_request %}
+            {% if p_request.failed == True %}
+            <br>
+            <font style="color:red;">Fail to process payment</font>
+            {% endif %}
+            {% endfor %}
+            <h6>You have withdraw ₦ {{paid}}</h6>
+
+
+            </div>
+        </div>
+
+
+        <div class="card text-dark bg-light border-success mb-3" style="max-width: 30rem;">
+        <div class="card-body" align="left">
+
+           <h6>Registered Apartment</h6>
+            <h5>{{reg_apartment}}</h5>
+            <hr>
+            <h6>You get ₦{{pay_unit}} per Apartment</h6>
+
+            </div>
+        </div>
+
+            <div class="card text-dark bg-light border-info mb-3" style="max-width: 30rem;">
+        <div class="card-body" align="left">
+           <h6 class="text-info">Payment Details</h6>
+            <h6>Bank: {{bank.bank}}</h6>
+             <h6>Acct: {{bank.account_number}}</h6>
+             <h6>Acct name: {{bank.account_name}}</h6>
+
+            <hr>
+            <a href="{% url 'edit_payment' %}">
+            <span class="bg-primary btn-sm" style="color: white;">Change bank details</span>
+            </a>
+            </div>
+        </div>
+
+
+
+<div class="container mt-3" align="center">
+    <div class="card text-white bg-dark mb-3" style="max-width: 30rem;">
+        <div class="card-body">
+                 <img src={{profile.image.url}} alt="..." width="100" height="100" class="rounded-circle"><br>
+                <b><font style="color: #b0b0b0; font-size: 20px;">{{profile.user}}</font></b><br>
+             <b><font style="color: #b0b0b0; font-size: 20px;">{{profile.phone}},{{profile.whatsapp}} </font></b><br>
+            <font style="color: #fff; font-size: 20px;">{{profile.Address}}</font><br>
+            <font style="color: #fff; font-size: 20px;">You have Reg. ({{profile.apartment}}) apartment</font><br>
+<a class="bg-primary btn-sm" style="color: white;" href="{% url 'edit_agent_profile' %}">Edit Profile</a>
+
+
+
+
+
+</div>
+
+    </div>
+</div>
+</div>
+
+{% endblock content %}

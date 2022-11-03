@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<div class="collapse" id="navbarToggleExternalContent">
+    <div class="bg-dark p-4">
+        <h5 class="text-white h4">Agent41.org</h5>
+        <span class="text-muted">Connect you to better clients</span>
+    </div>
+</div>
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>
+
+
+
+<div class="container mt-3 " align="center">
+       <div align="left">
+       <a href="{% url 'dashboard'%}">
+          <i class='bx bx-grid-alt text-info' style="font-size: 30px"></i>
+          <span class="text-info" style="font-size: 30px">Dashboard</span>
+       </a>
+    </div>
+
+    <div align="right">
+    <a type="button" href="{% url 'paid_agent'%}" class="btn  btn-primary" >Agent Payments</a>
+    </div>
+    <h4 style="color:gray;">Agent List</h4>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">S/N</th>
+      <th scope="col">username</th>
+      <th scope="col">fullname</th>
+      <th scope="col">phone</th>
+      <th scope="col">whatsapp</th>
+      <th scope="col">Reg_date</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+   {% for agent in agent %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>{{agent.user}}</td>
+      <td>{{agent.full_name}}</td>
+      <td>{{agent.phone}}</td>
+      <td>{{agent.whatsapp}}</td>
+      <td>{{agent.reg_date}}</td>
+      <td><a type="button" href="{% url 'agent_details' agent.pk %}" class="btn  btn-primary">Details</a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+</div>
+
+{% endblock content %}

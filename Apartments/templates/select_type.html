@@ -1,0 +1,38 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" media="screen,projection"/>
+    <link rel="stylesheet" href="{% static 'css/mycss.css' %}" type="text/css">
+    <link rel="icon" href="{% static 'images/icon.png' %}" type="image/lxx-icon">
+    <title>Agent41.org</title>
+</head>
+<body>
+
+<div align="center" class=" top_body">
+    <img alt="..." class="" height="auto" src="{% static 'images/logo1.png' %}" width="300dp">
+    <h3><font style="color:#011a4a;">What Kind of Apartment<br> you looking for ?</font></h3>
+
+</div>
+
+<div align="center" class="mt-0 mb-3 ">
+    <img alt="..." class="" height="auto" src="{% static 'images/find2.png' %}" width="300dp">
+</div>
+
+<div class="d-grid gap-2 col-6 mx-auto">
+    <a href="{% url 'residential' %}" class="shadow p-2 btn btn-light btn-lg" type="button">Residential Apartment</a>
+    <a href="{% url 'commercial' %}" class="shadow p-2 btn btn-dark btn-lg" type="button">Commercial
+        Apartment</a>
+</div>
+
+<br>
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script type="text/javascript" src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

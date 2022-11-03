@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<div class="collapse" id="navbarToggleExternalContent">
+    <div class="bg-dark p-4">
+        <h5 class="text-white h4">Agent41.org</h5>
+        <span class="text-muted">Connect you to better clients</span>
+    </div>
+</div>
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" xmlns="http://www.w3.org/1999/html">
+  <div class="container-fluid">
+      <a class="navbar-brand" href="#">Agent41.org <font style="color:skyblue;">Request Manager</font></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Database</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Revenue Filter
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#">Daily Revenue</a></li>
+            <li><a class="dropdown-item" href="#">Weekly Revenue</a></li>
+            <li><a class="dropdown-item" href="#">Monthly Revenue</a></li>
+            <li><a class="dropdown-item" href="#">Yearly Revenue</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Daily Expenses</a></li>
+            <li><a class="dropdown-item" href="#">Weekly Expenses</a></li>
+            <li><a class="dropdown-item" href="#">Monthly Expenses</a></li>
+            <li><a class="dropdown-item" href="#">Yearly Expenses</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Debtors</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container mt-3 " align="center">
+       <div align="left">
+       <a href="{% url 'dashboard'%}">
+          <i class='bx bx-grid-alt text-info' style="font-size: 30px"></i>
+          <span class="text-info" style="font-size: 30px">Dashboard</span>
+       </a>
+    </div>
+    <div class="btn-group" role="group" aria-label="Basic example">
+  <a type="button" class="btn btn-primary" href="{% url 'management_daily_apartment_request'%}">Daily Apartment Request</a>
+  <a type="button" class="btn btn-primary" href="{% url 'management_weekly_apartment_request'%}">Weekly Apartment Request</a>
+  <a type="button" class="btn btn-dark" >All Apartment Request</a>
+  </div><br><br>
+
+    <div class="btn-group mb-3" role="group" aria-label="Basic radio toggle button group">
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+        <label class="btn btn-outline-info" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+               aria-controls="collapseOne" for="btnradio1">Residential Request</label>
+
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+        <label class="btn btn-outline-info" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+               aria-controls="collapseTwo"
+               for="btnradio2">Commercial Request</label>
+
+    </div>
+
+    <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                        aria-expanded="true" aria-controls="collapseOne">
+                    <b class="text-dark">Residential Apartments Request</b>
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+
+                    <div class="list-group">
+                        {% if apartment_request %}
+                        {% for request in apartment_request%}
+                        <a href="{% url 'management_res_apartment_request_detail' request.id request.apartment.pk %}" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">{{request.client}}</h5>
+                                <small class="text-muted">{{request.timestamp}}<br>
+                                     {% if request.comfirmed == True %}
+                                    <b style="color: green; font-size: 18px;"> Confirmed By {{ request.user }}  </b>
+                                    {% else %}
+                                    <b style="color: gray; font-size: 18px;"> Unconfirmed </b>
+                                    {% endif %}
+
+                                </small>
+
+                            </div>
+                            <p class="mb-1" align="left">Requested for <b>{{request.apartment.name}}</b></p>
+                            <p class="text-muted" align="left">{{request.phone}}</p>
+                        </a>
+                       {% endfor %}
+                        {% else %}
+                        <h4>No Residential Apartment Request</h4>
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    <b class="text-dark">Commercial Apartments Request</b>
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                        <div class="list-group">
+                            {% if apartment_request_comm %}
+                        {% for request in apartment_request_comm %}
+                        <a href="{% url 'management_comm_apartment_request_detail' request.id request.apartment.pk %}" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">{{request.client}}</h5>
+                                <small class="text-muted">{{request.timestamp}}<br>
+                                     {% if request.comfirmed == True %}
+                                    <b style="color: green; font-size: 18px;"> Confirmed By {{ request.user }}  </b>
+                                    {% else %}
+                                    <b style="color: gray; font-size: 18px;"> Unconfirmed </b>
+                                    {% endif %}
+
+                                </small>
+
+                            </div>
+                            <p class="mb-1" align="left">Requested for <b>{{request.apartment.name}}</b></p>
+                            <p class="text-muted" align="left">{{request.phone}}</p>
+                        </a>
+                       {% endfor %}
+                          {% else %}
+                        <h4>No Commercial Apartment Request</h4>
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+{% endblock content %}

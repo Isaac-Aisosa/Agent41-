@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<div class="collapse" id="navbarToggleExternalContent">
+    <div class="bg-dark p-4">
+        <h5 class="text-white h4">Agent41.org</h5>
+        <span class="text-muted">Connect you to better clients</span>
+    </div>
+</div>
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>
+
+
+
+<div class="container mt-3 " align="center">
+     <div align="left">
+       <a href="{% url 'dashboard'%}">
+          <i class='bx bx-grid-alt text-info' style="font-size: 30px"></i>
+          <span class="text-info" style="font-size: 30px">Dashboard</span>
+       </a>
+    </div>
+    <h4>Total Money paid to Agents</h4>
+    <h6 class="text-success">NGN</h6>
+     <h3>₦ {{ total_paid }}</h3>
+    <div class="btn-group" role="group" aria-label="Basic example">
+  <a type="button" class="btn btn-dark">Paid Agents</a>
+  <a type="button" class="btn btn-primary" href="{% url 'agent_payment_request'%}">Pending Payments</a>
+  <a type="button" class="btn btn-primary" href="{% url 'failed_payment'%}">Failed Payment</a>
+  </div><br><br>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">S/N</th>
+      <th scope="col">Agent</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Request Time</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+   {% for pay in fpay %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>{{pay.user}}</td>
+      <td>NGN {{pay.Amount}}</td>
+      <td>{{pay.timestamp}}</td>
+      <td><span class="bg-success btn-sm" style="color: white;">Paid</span></td>
+      <td><a type="button" href="{% url 'request_detail' pay.pk %}" class="btn  btn-primary">Details</a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+{% endblock content %}

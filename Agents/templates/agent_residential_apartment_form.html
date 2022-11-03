@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<div class="container mt-1 " align="center" xmlns="http://www.w3.org/1999/html">
+
+  <div class="mb-5 bg-light" style="width: 25rem;">
+    <br>
+   <div align="center " >  <img alt="..." class="rounded-circle"
+          height="70dp" src="{% static 'images/icon.png' %}" width="70dp"></a></div>
+      <h4 class="text: dark;"><font>Agent {{user}}</font></h4>
+    <h4 class="text: dark;"><font>Register <br> New Residential Apartment</font></h4>
+  <form class="form-floating" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {% for field in form %}
+
+      <p>
+        {{ field.label_tag }}<br>
+        {{ field }}
+
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+      </p>
+    {% endfor %}
+    <button type="submit" class="btn btn-primary my-1">Submit and proceed</button>
+  </form>
+    <br>
+  </div>
+</div>
+
+{%endblock%}
